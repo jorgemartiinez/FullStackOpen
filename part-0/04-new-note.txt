@@ -1,0 +1,47 @@
+browser->server: User fills the input and press the Save Button
+browser->server: HTTP POST https://fullstack-exampleapp.herokuapp.com/newnote 
+server->browser: Returns a 302 Found Status Code. 
+
+note over server:
+At this moment, the server saves the new note, 
+and makes the browser redirect to '/note' 
+end note
+
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/notes
+server->browser: Returns a 200 OK 
+
+note over browser: 
+The browser gets the HTML of the page 'notes'. 
+The head contains a CSS file, so browser has to 
+fetch it from the server.
+end note
+
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css
+server->browser: Returns a 200 OK Code
+
+note over browser: 
+The browser gets the CSS of the page,
+and applies the style to it. It continues 
+checking the HTML file, and it founds a script 
+tag called main.js that has to be fetched
+end note
+
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.js
+server->browser: Returns a 200 OK 
+
+note over browser:
+Browser has now the main.js file, 
+so it can now execute it. It makes
+a get to /data.json to recieve notes.
+end note
+
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json
+server->browser: Returns a 200 OK 
+
+note over browser:
+The browser gets the JSON response, 
+containing the array of notes, and 
+now it can display the data on screen,
+making an ul with li childs containing each
+one of the notes.
+end note

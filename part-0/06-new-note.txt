@@ -1,0 +1,19 @@
+note over browser:
+User fills the input and press the button
+end note
+
+note over browser:
+The browser prevents the submit, so the page
+is not going to reload. Afterwards, it 
+adds the new note to the list, and makes 
+a request to the server with the content of it
+end note
+
+browser->server: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa 
+
+note over server:
+The server gets the new note and saves it.
+end note
+
+server->browser: Returns 201 Created Status with the response {"message":"note created"}
+

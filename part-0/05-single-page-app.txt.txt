@@ -1,0 +1,38 @@
+note over browser:
+User enters to the page
+end note
+
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/notes 
+server->browser: Returns 200 OK
+
+note over browser:
+Browser gets the HTML and fetch
+the main.css file
+end note
+
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css 
+server->browser: Returns 200 OK
+
+note over browser:
+Browser applies the CSS 
+to the page. It now founds a 
+spa.js file that has to be fetched
+end note
+
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/spa.js 
+server->browser: Returns 200 OK
+
+note over browser:
+Browser gets spa.js and
+executes the code, making a GET 
+request to /data.json
+end note
+
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json
+server->browser: Returns 200 OK
+
+note over browser:
+Browser gets the array of notes
+and displays it on the page through
+a list of ul
+end note
