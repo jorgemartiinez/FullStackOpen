@@ -39,6 +39,16 @@ let phonebook = [
 
 
 app.get('/api/persons', (req, res) => {
+    return res.send(`
+    <h1>Index of the project</h1>
+    <ul>
+    <li><a href="info">Info</li>
+    <li><a href="/api/persons">List persons</li>
+    </ul>`);
+});
+
+
+app.get('/api/persons', (req, res) => {
     return res.json({
         ok: true,
         phonebook
