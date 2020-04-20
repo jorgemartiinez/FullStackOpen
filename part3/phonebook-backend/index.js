@@ -7,6 +7,9 @@ const cors = require('cors')
 // Peticiones cors
 app.use(cors())
 
+// static files on build folder (will search for a index.html file)
+app.use(express.static('build'))
+
 // express config
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
