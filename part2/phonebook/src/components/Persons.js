@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Persons = ({ persons, search, handleDelete }) => {
+    console.log(persons)
     return (
         persons.map(person => {
             if (person.name.toUpperCase().trim().includes(search.toUpperCase().trim())) {

@@ -1,8 +1,12 @@
 const express = require('express');
 const app = express();
-const PORT = 3001;
 const morgan = require('morgan');
 const {requestLogger, unknownEndpoint} = require('./middlewares/middlewares');
+const cors = require('cors')
+
+// Peticiones cors
+app.use(cors())
+
 // express config
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
@@ -13,7 +17,7 @@ app.use(morgan(':method :url :status :req[content-length] - :response-time ms :b
 
 // custom middlewares
 app.use(requestLogger);
-app.use(unknownEndpoint);
+// app.use(unknownEndpoint);
 
 let phonebook = [
     {
@@ -130,5 +134,7 @@ app.post('/api/persons', (req, res) => {
     })
 
 });
+
+const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, (err) => console.log(`Server listening on port ${PORT}`));
