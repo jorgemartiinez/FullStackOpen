@@ -38,7 +38,7 @@ let phonebook = [
 ]
 
 
-app.get('/api/persons', (req, res) => {
+app.get('/', (req, res) => {
     return res.send(`
     <h1>Index of the project</h1>
     <ul>
