@@ -24,7 +24,7 @@ app.get('/persons', (req, res) => {
         )
         .catch(err => {
             console.log(err);
-            res.status(400).send({ ok: false, err })
+            res.status(400).send({ ok: false, err });
         });
 });
 
@@ -35,7 +35,7 @@ app.get('/info', (req, res, next) => {
             const time = new Date();
             return res.send(`
             <p>Phonebook has info for ${count} people.</p>
-            <p>${time}</p>`)
+            <p>${time}</p>`);
         })
         .catch(err => {
             console.log(err);
@@ -55,15 +55,15 @@ app.get('/persons/:id', (req, res, next) => {
                     err: 'The person that you are trying to request doesn\'t exist. Please try again'
                 });
             }
-
             return res.json({
                 ok: true,
                 phonebook: person
             });
-        }).catch(err => {
+        })
+        .catch(err => {
             console.log(err);
             next(err);
-        })
+        });
 });
 
 
@@ -107,7 +107,7 @@ app.put('/persons/:id', (req, res, next) => {
         number: body.number
     };
 
-    Person.findByIdAndUpdate(id, updatedPerson, {new: true})
+    Person.findByIdAndUpdate(id, updatedPerson, { new: true })
         .then(person => {
             if (!person) {
                 return res.status(404).json({
