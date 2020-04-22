@@ -13,7 +13,7 @@ const addNew = (newPerson) => {
 
 const del = (id) => {
     const request = axios.delete(`${URL}/${id}`);
-    return request.then(response => response.dat.phonebook);
+    return request.then(response => response.data.phonebook);
 }
 
 const updateNumber = (id, updatedPerson) => {

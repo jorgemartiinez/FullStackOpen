@@ -57,8 +57,8 @@ const App = () => {
           setNotification({ message: `New person added`, type: 'success' })
           setPersons(persons.concat(newPerson))
         })
-      console.log('New person added', persons);
-    }
+        .catch(err => setNotification({ message: `Error adding new person ${err.response.data.err}`, type: 'error' }));
+      }
   }
 
   const handleDelete = (name, id) => {
