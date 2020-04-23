@@ -4,9 +4,9 @@
   "description": "Blog list for part 4 fullstackopen",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "run": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test": "jest --verbose"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +17,10 @@
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
+    "jest": "^25.4.0",
     "nodemon": "^2.0.3"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
