@@ -1,5 +1,5 @@
-const http = require('http');
 const app = require('./server/app');
+const http = require('http');
 const config = require('./server/utils/config');
 const logger = require('./server/utils/logger');
 

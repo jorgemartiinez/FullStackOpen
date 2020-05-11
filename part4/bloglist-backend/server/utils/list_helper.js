@@ -16,16 +16,8 @@ const favoriteBlog = (blogs) => {
 };
 
 
-const authorWithMoreBlogs = (blogs) => {
-
-    for(let i = 0; i)
-
-    return;
-}
-
 module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
-  authorWithMoreBlogs
 };

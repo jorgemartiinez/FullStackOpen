@@ -1,4 +1,4 @@
-const { totalLikes, favoriteBlog, authorWithMoreBlogs } = require('../utils/list_helper');
+const { totalLikes, favoriteBlog } = require('../utils/list_helper');
 
 const blogs = [
   {
@@ -54,18 +54,4 @@ describe('favorite blog tests', () => {
   });
 });
 
-
-describe('author with most blogs tests', () => {
-
-  test('return the author that has more blogs', () => {
-
-    const result = authorWithMoreBlogs(blogs);
-
-    result.expect(result).toBe({
-      author: '', //TODO PONER ESTA MIERDA
-      blogs: 1
-    })
-
-  });
-
-})
+// TODO 2 ex
