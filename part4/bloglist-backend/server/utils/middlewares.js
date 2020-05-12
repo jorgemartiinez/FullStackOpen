@@ -1,4 +1,5 @@
 const logger = require('./logger');
+const jwt = require('jsonwebtoken');
 
 const requestLogger = (request, response, next) => {
   logger.info('Method:', request.method);
@@ -19,13 +20,31 @@ const errorHandler = (error, request, response, next) => {
     return response.status(400).send({ error: 'malformatted id' });
   } else if (error.name === 'ValidationError') {
     return response.status(400).json({ error: error.message });
+  } else if (error.name === 'JsonWebTokenError') {
+    return response.status(401).json({
+      error: 'invalid token',
+    });
   }
-
   next(error);
+};
+
+// ! TOKEN MIDDLEWARE
+const verifyToken = (request, response, next) => {
+  const token = request.get('token') || '';
+  try {
+    const decoded = jwt.verify(token, process.env.SECRET);
+    request.token = decoded;
+    next();
+  } catch (err) {
+    return response.json({
+      err: 'Invalid token!',
+    });
+  }
 };
 
 module.exports = {
   requestLogger,
   unknownEndpoint,
   errorHandler,
+  verifyToken,
 };
