@@ -46,6 +46,7 @@ const App = () => {
     event.preventDefault();
     const newBlog = await blogService.add(blog);
     setBlogs(blogs.concat(newBlog));
+    makeNotification('New blog added', 1);
   };
 
   const handleLogout = async (event) => {
