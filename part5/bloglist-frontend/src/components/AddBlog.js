@@ -1,36 +1,38 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-const AddBlog = ({ setBlog, handleAddBlog }) => {
+const AddBlog = ({ handleAddBlog }) => {
+  const [newBlog, setNewBlog] = useState({});
+
   const handleChange = ({ target }) => {
-    console.log('change', target.name);
-    switch (target.name) {
-      case 'title':
-        setBlog((prevState) => ({ ...prevState, title: target.value }));
-        break;
-      case 'url':
-        setBlog((prevState) => ({ ...prevState, url: target.value }));
-        break;
-      case 'author':
-        setBlog((prevState) => ({ ...prevState, author: target.value }));
-        break;
-      default:
-        return;
-    }
+    let name = target.name;
+    let value = target.value;
+    const changeBlog = newBlog;
+    changeBlog[name] = value;
+    setNewBlog({ ...changeBlog });
+  };
+
+  const addBlog = async (ev) => {
+    ev.preventDefault();
+    await handleAddBlog(newBlog);
+    setNewBlog({});
   };
 
   return (
     <div>
-      <form onSubmit={handleAddBlog}>
+      <form id="addBlog" onSubmit={addBlog}>
         <label htmlFor="title">Title</label>
-        <input type="text" onChange={handleChange} name="title" id="title"></input>
+        <input type="text" onChange={handleChange} value={newBlog.title || ''} name="title" id="title"></input>
         <label htmlFor="author">Author</label>
-        <input type="text" onChange={handleChange} name="author" id="author"></input>
+        <input type="text" onChange={handleChange} value={newBlog.author || ''} name="author" id="author"></input>
         <label htmlFor="url">Url</label>
-        <input type="text" onChange={handleChange} name="url" id="url"></input>
+        <input type="text" onChange={handleChange} value={newBlog.url || ''} name="url" id="url"></input>
         <button type="submit">Add</button>
       </form>
     </div>
   );
 };
-
+AddBlog.propTypes = {
+  handleAddBlog: PropTypes.func.isRequired,
+};
 export default AddBlog;

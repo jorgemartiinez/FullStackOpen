@@ -19,4 +19,20 @@ const add = async (newBlog) => {
   return response.data;
 };
 
-export default { getAll, add, setToken };
+const addLike = async (newBlog) => {
+  const config = {
+    headers: { token },
+  };
+  const response = await axios.put(`${baseUrl}/${newBlog.id}`, newBlog, config);
+  return response.data;
+};
+
+const deleteBlog = async (id) => {
+  const config = {
+    headers: { token },
+  };
+  const response = await axios.delete(`${baseUrl}/${id}`, config);
+  return response.data;
+};
+
+export default { getAll, add, setToken, addLike, deleteBlog };

@@ -1,18 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-const LoginForm = ({ handleLogin, setUsername, setPassword }) => {
+const LoginForm = ({ handleLogin }) => {
+  const [login, setLogin] = useState({});
+
+  const handleChange = ({ target }) => {
+    let name = target.name;
+    let value = target.value;
+    const changeBlog = login;
+    changeBlog[name] = value;
+    setLogin({ ...changeBlog });
+  };
+
+  const onSubmit = async (ev) => {
+    ev.preventDefault();
+    console.log('login on submit');
+    await handleLogin(login);
+    console.log('llamada hecha vaciamos');
+    setLogin({});
+  };
+
   return (
     <div>
       <h1>Log in Form</h1>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={onSubmit}>
         <label>Username</label>
-        <input type="text" onChange={(ev) => setUsername(ev.target.value)}></input>
+        <input type="text" name="username" onChange={handleChange} value={login.username || ''}></input>
         <label>Password</label>
-        <input type="password" onChange={(ev) => setPassword(ev.target.value)}></input>
+        <input type="password" name="password" onChange={handleChange} value={login.password || ''}></input>
         <button>Login</button>
       </form>
     </div>
   );
 };
+
+LoginForm.propTypes = {
+  handleLogin: PropTypes.func.isRequired,
+}
 
 export default LoginForm;
