@@ -57,6 +57,7 @@ const App = () => {
 
   const handleAddLike = async (blog) => {
     blogFormRef.current.toggleVisibility();
+    blog.likes++;
     const updateBlog = await blogService.addLike(blog);
     let updatedBlogs = [...blogs];
     updatedBlogs.map((blog) => {

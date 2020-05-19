@@ -12,11 +12,6 @@ const Blog = ({ blog, handleAddLike, handleRemove, userId }) => {
     marginBottom: 5,
   };
 
-  const addLike = async () => {
-    blog.likes++;
-    await handleAddLike(blog);
-  };
-
   const remove = async (id) => {
     if (window.confirm(`Are you sure that you want to delete the blog ${blog.title}?`)) {
       await handleRemove(id);
@@ -26,7 +21,8 @@ const Blog = ({ blog, handleAddLike, handleRemove, userId }) => {
   if (!showAll) {
     return (
       <div style={blogStyle}>
-        {blog.title}{' '}
+        {blog.title}
+        <br /> {blog.author}
         <button
           onClick={() => {
             setShowAll(true);
@@ -37,12 +33,17 @@ const Blog = ({ blog, handleAddLike, handleRemove, userId }) => {
       </div>
     );
   } else {
-    console.log(blog);
-    console.log(userId);
     return (
       <div style={blogStyle}>
         {blog.title} <br /> {blog.author} <br /> {blog.url} <br /> {blog.likes}
-        <button onClick={addLike}>Like</button> <br />
+        <button
+          onClick={() => {
+            handleAddLike(blog);
+          }}
+        >
+          Like
+        </button>{' '}
+        <br />
         {blog.user.id === userId ? (
           <button
             onClick={() => {
