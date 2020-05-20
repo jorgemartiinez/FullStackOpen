@@ -1,13 +1,22 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { vote } from '../reducers/anecdoteReducer';
+import { vote } from '../store/reducers/anecdoteReducer';
+import { show, hide } from '../store/reducers/notificationReducer';
 
 function AnecdoteList() {
   const dispatch = useDispatch();
-  const anecdotes = useSelector((state) => state.sort((a, b) => (a.votes > b.votes ? -1 : 1)));
+  const anecdotes = useSelector((state) => {
+    console.log('display statate selector', state);
+    let notes = state.anecdotes.sort((a, b) => (a.votes > b.votes ? -1 : 1));
+    if (state.filter.length > 0) {
+      notes = notes.filter((note) => note.content.toLowerCase().trim().includes(state.filter.toLowerCase().trim()));
+    }
+    return notes;
+  });
 
-  const addVote = (id) => {
-    dispatch(vote(id));
+  const addVote = (anecdote) => {
+    dispatch(vote(anecdote));
+    dispatch(show(`Vote added correctly to - ${anecdote.content}`, 2));
   };
 
   return (
@@ -17,7 +26,7 @@ function AnecdoteList() {
           <div>{anecdote.content}</div>
           <div>
             has {anecdote.votes}
-            <button onClick={() => addVote(anecdote.id)}>vote</button>
+            <button onClick={() => addVote(anecdote)}>vote</button>
           </div>
         </div>
       ))}
